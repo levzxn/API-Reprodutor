@@ -1,0 +1,8 @@
+.reprodutor{
+    display: flex;
+    background-color: black;
+    color: white;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
