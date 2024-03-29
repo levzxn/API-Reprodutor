@@ -1,0 +1,16 @@
+.barra-progresso{
+    display: flex;
+    justify-content: center;
+    align-items: center ;
+    padding: 0.5em;
+}
+
+p{
+    padding: 1em;
+    white-space: pre-line;
+}
+
+.barra-progresso > div{
+    height: fit-content;
+    border-radius: 3px;
+}
