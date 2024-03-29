@@ -4,23 +4,23 @@ import Reprodutor from './Componentes/Reprodutor';
 import { getMusicas } from './API/Conexao';
 
 function App() {
-  
-  const [listaReproducao, setListaReproducao] = useState(null)
 
-  useEffect(() =>{
-    const fetchMusicas = async () =>{
-      const musicas =  await getMusicas()
-      return musicas
+  const [listaReproducao, setListaReproducao] = useState([])
+
+  useEffect(() => {
+    const fetchMusicas = async () => {
+      const musicas = await getMusicas()
+      setListaReproducao(musicas)
     }
-    setListaReproducao(fetchMusicas())
+    fetchMusicas()
   }, [])
 
-  return(
-    listaReproducao.map((musica) => {
-      return(
-        <Reprodutor url={musica.url} nome={musica.nome}></Reprodutor>
-      )
-    })
+  return (
+    <main>
+      <div className='container_musica'>
+        {listaReproducao.map((musica) => {return <Reprodutor capa={musica.capa} audio={musica.audio} titulo={musica.titulo}></Reprodutor>})}
+      </div>
+    </main>
   )
 }
 

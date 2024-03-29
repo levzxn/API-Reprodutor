@@ -3,12 +3,13 @@ import './Reprodutor.css'
 
 const Reprodutor = (props) =>{
     return(
-        <div className="reprodutor">
-            <a href={props.url}>{props.nome}
-                <AudioPlayer audioUrl={props.url}></AudioPlayer>
-            </a>
+        <ul className='reprodutor'>
+            <li>
+                <img src={`http://127.0.0.1:8000${props.capa}`}></img>
+                <AudioPlayer audioUrl={`http://127.0.0.1:8000${props.audio}`}></AudioPlayer>
+            </li>
+        </ul>
 
-        </div>
     )
 }
 export default Reprodutor

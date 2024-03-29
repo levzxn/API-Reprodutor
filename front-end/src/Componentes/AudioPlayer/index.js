@@ -21,9 +21,9 @@ const AudioPlayer = ({ audioUrl }) => {
   };
 
   return (
-    <div>
-      <button onClick={carregarReproduzirAudio}>Reproduzir</button>
-    </div>
+    <>
+      <button onClick={(evento) => carregarReproduzirAudio(evento)}>Reproduzir</button>
+    </>
   );
 }
 
