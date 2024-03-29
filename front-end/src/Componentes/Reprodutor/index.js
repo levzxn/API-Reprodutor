@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import AudioPlayer from '../AudioPlayer'
 import './Reprodutor.css'
-import { IoPauseCircle, IoPlayCircle, IoPlayForwardCircle } from "react-icons/io5";
+import { IoPauseCircle, IoPlayBackCircle, IoPlayCircle, IoPlayForwardCircle } from "react-icons/io5";
 import calcularCorMediaDaImagem from '../../Utils/imagemCor';
 import { getLetrasMusicas } from '../../API/Conexao';
 
@@ -11,14 +11,19 @@ const Reprodutor = ({ listaReproducao }) => {
     const [musicaAtual, setMusicaAtual] = useState(0)
     const [cordaSection, setCordaSection] = useState('')
     const [letraMusica, setLetraMusica] = useState('')
-
+    
     const proximaMusica = () => {
         setMusicaAtual((indexAnterior) => (indexAnterior + 1) % listaReproducao.length)
+    }
+
+    const musicaAnterior = () => {
+        setMusicaAtual((indexAnterior) => indexAnterior - 1 < 0 ? listaReproducao.length - 1 : indexAnterior - 1)
     }
 
     const setPlayPause = () => {
         setReproduzindoAgora(!reproduzindoAgora)
     }
+
 
     useEffect(() => {
         const alterarCor = async () => {
@@ -48,10 +53,9 @@ const Reprodutor = ({ listaReproducao }) => {
 
             </div>
             <div className="controls">
-                <i onClick={setPlayPause}>
-                    {reproduzindoAgora ? <IoPauseCircle className='play-pause' /> : <IoPlayCircle className='play-pause' />}
-                </i>
 
+                <i onClick={musicaAnterior}><IoPlayBackCircle /></i>
+                <i onClick={setPlayPause}>{reproduzindoAgora ? <IoPauseCircle className='play-pause' /> : <IoPlayCircle className='play-pause' />}</i>
                 <i onClick={proximaMusica}><IoPlayForwardCircle /></i>
             </div>
             <div className='barra'>
