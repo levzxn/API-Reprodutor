@@ -29,12 +29,13 @@ const BarraProgresso = ({ porcentagem, tempoAudio, duracaoTotal }) => {
     return (
         <div className="barra-progresso">
             <p>{tempo}</p> 
-            <div style={{ width: '70%', backgroundColor: '#ccc' }}>
+            <div style={{ width: '70%', backgroundColor: 'rgba(255, 255, 255, 0.3)' }}>
                 <div
                     style={{
                         width: `${porcentagemBarra}%`,
                         height: '5px',
-                        backgroundColor: 'green',
+                        backgroundColor: 'white',
+                        borderRadius:'5px'
                     }} />
             </div>
             <p>{duracao}</p>

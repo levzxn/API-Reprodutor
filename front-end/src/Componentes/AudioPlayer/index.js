@@ -53,7 +53,7 @@ const AudioPlayer = ({ audioUrl, aoAcabar, reproduzindoAgora }) => {
 
   return (
     <>
-      <BarraProgresso porcentagem={calcularPorcentagemConclusao} tempoAudio={formatarTempo(tempo)} duracaoTotal={formatarTempo(duracao)}/>
+      <BarraProgresso porcentagem={calcularPorcentagemConclusao} tempoAudio={formatarTempo(tempo)} duracaoTotal={duracao ? formatarTempo(duracao) : '00:00'}/>
       <audio
         ref={audioRef}
         src={audioUrl}
