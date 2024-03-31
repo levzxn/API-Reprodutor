@@ -3,8 +3,8 @@ from mutagen.mp3 import MP3
 
 class Musica(models.Model):
     titulo = models.CharField(max_length=50)
-    audio = models.FileField()
-    capa = models.ImageField(blank=True)
+    audio = models.FileField(upload_to="audio/%Y/%m/%d",blank=True)
+    capa = models.ImageField(upload_to="fotos/%Y/%m/%d",blank=True)
 
     def __str__(self) -> str:
         return self.titulo
