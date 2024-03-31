@@ -11,7 +11,7 @@ const Reprodutor = ({ listaReproducao }) => {
     const [musicaAtual, setMusicaAtual] = useState(0)
     const [cordaSection, setCordaSection] = useState('')
     const [letraMusica, setLetraMusica] = useState('')
-    
+
     const proximaMusica = () => {
         setMusicaAtual((indexAnterior) => (indexAnterior + 1) % listaReproducao.length)
     }
@@ -53,18 +53,14 @@ const Reprodutor = ({ listaReproducao }) => {
 
             </div>
             <div className="controls">
-
                 <i onClick={musicaAnterior}><IoPlayBackCircle /></i>
                 <i onClick={setPlayPause}>{reproduzindoAgora ? <IoPauseCircle className='play-pause' /> : <IoPlayCircle className='play-pause' />}</i>
                 <i onClick={proximaMusica}><IoPlayForwardCircle /></i>
             </div>
-            <div className='barra'>
-                <AudioPlayer
-                    audioUrl={listaReproducao[musicaAtual].audio}
-                    aoAcabar={proximaMusica}
-                    reproduzindoAgora={reproduzindoAgora}
-                />
-            </div>
+            <AudioPlayer
+                audioUrl={listaReproducao[musicaAtual].audio}
+                aoAcabar={proximaMusica}
+                reproduzindoAgora={reproduzindoAgora}/>
         </section>
     )
 };

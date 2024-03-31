@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    align-items: center;
+}
+
+.container_barra{
+    width: 100%;
+}
+
+.barra-volume{
+    display: flex;
+}
