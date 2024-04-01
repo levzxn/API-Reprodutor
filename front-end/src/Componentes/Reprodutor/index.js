@@ -4,13 +4,11 @@ import AudioPlayer from '../AudioPlayer'
 import './Reprodutor.css'
 import { IoPauseCircle, IoPlayBackCircle, IoPlayCircle, IoPlayForwardCircle } from "react-icons/io5";
 import calcularCorMediaDaImagem from '../../Utils/imagemCor';
-import { getLetrasMusicas } from '../../API/Conexao';
 
 const Reprodutor = ({ listaReproducao }) => {
     const [reproduzindoAgora, setReproduzindoAgora] = useState(false)
     const [musicaAtual, setMusicaAtual] = useState(0)
     const [cordaSection, setCordaSection] = useState('')
-    const [letraMusica, setLetraMusica] = useState('')
 
     const proximaMusica = () => {
         setMusicaAtual((indexAnterior) => (indexAnterior + 1) % listaReproducao.length)
@@ -31,11 +29,6 @@ const Reprodutor = ({ listaReproducao }) => {
             setCordaSection(cor)
 
         }
-        const carregarLetraMusica = async () => {
-            const letraMusica = await getLetrasMusicas(listaReproducao[musicaAtual].artista, listaReproducao[musicaAtual].titulo)
-            setLetraMusica(letraMusica)
-        }
-        carregarLetraMusica()
         alterarCor()
     }, [cordaSection, listaReproducao, musicaAtual])
 
@@ -45,9 +38,10 @@ const Reprodutor = ({ listaReproducao }) => {
                 <div className='infos'>
                     <img src={listaReproducao[musicaAtual].capa} alt="Capa da música" />
                     <h1>{listaReproducao[musicaAtual].titulo}</h1>
+                    <h3>{listaReproducao[musicaAtual].artista}</h3>
                 </div>
                 <div className='letra'>
-                    <p>{letraMusica}</p>
+                    <p>{listaReproducao[musicaAtual].letra}</p>
                 </div>
 
 
