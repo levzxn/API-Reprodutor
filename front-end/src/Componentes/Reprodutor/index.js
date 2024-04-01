@@ -32,7 +32,7 @@ const Reprodutor = ({ listaReproducao }) => {
 
         }
         const carregarLetraMusica = async () => {
-            const letraMusica = await getLetrasMusicas('Matuê', listaReproducao[musicaAtual].titulo)
+            const letraMusica = await getLetrasMusicas(listaReproducao[musicaAtual].artista, listaReproducao[musicaAtual].titulo)
             setLetraMusica(letraMusica)
         }
         carregarLetraMusica()

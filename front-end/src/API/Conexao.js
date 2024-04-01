@@ -5,14 +5,18 @@ const getMusicas =  async () => {
 }
 
 
-const key = 'a27e2f0b96c761592dac5a5668183c30'
+const key = '515b97b70d2edaa68b1cf63d47826967'
 const getLetrasMusicas = async (nomeArtista, musica) =>{
     const nomeArtistaFormatado = nomeArtista.trim().replace(/\s+/g, '-');
     const musicaFormatada = musica.trim().replace(/\s+/g, '-');
-    const conexao = await fetch(`https://api.vagalume.com.br/search.php?art=${nomeArtistaFormatado}&mus=${musicaFormatada}&apikey=${key}`)
-    const letra = await conexao.json()
-    const letraFormatada = letra.mus[0].text
-    return letraFormatada
+    const query = await fetch(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.search?q_track=${musicaFormatada}&q_artist=${nomeArtistaFormatado}&apikey=${key}`)
+    const resultQuery = await query.json()
+    console.log(resultQuery)
+    const idMusica  = resultQuery['message']['body']['track_list'][0]['track']['track_id']
+    const getLetra = await fetch(`https://cors-anywhere.herokuapp.com/http://api.musixmatch.com/ws/1.1/track.lyrics.get?track_id=${idMusica}&apikey=515b97b70d2edaa68b1cf63d47826967`)
+    const resultLetra = await getLetra.json()
+    const letra = resultLetra['message']['body']['lyrics']['lyrics_body']
+    return letra
 }
 
 export { getMusicas, getLetrasMusicas }

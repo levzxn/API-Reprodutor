@@ -9,7 +9,7 @@ api = NinjaAPI()
 @api.get('musicas/')
 def musica(request):
     musicas = Musica.objects.all()
-    jsonMusicas = [{'titulo': i.titulo, 'audio': urlServidor + i.audio.url,'capa':urlServidor + i.capa.url,'duracao':i.duracao_formatada} for i in musicas]
+    jsonMusicas = [{'titulo': i.titulo, 'audio': urlServidor + i.audio.url,'capa':urlServidor + i.capa.url,'duracao':i.duracao_formatada, 'artista':i.artista} for i in musicas]
     return jsonMusicas
 
 @api.get('musica/{id}')
