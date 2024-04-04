@@ -1,62 +1,57 @@
-
-import React, { useEffect, useState } from 'react'
-import AudioPlayer from '../AudioPlayer'
-import './Reprodutor.css'
-import { IoPauseCircle, IoPlayBackCircle, IoPlayCircle, IoPlayForwardCircle } from "react-icons/io5";
+import React, { useEffect, useState } from 'react';
+import AudioPlayer from '../AudioPlayer';
+import './Reprodutor.css';
 import calcularCorMediaDaImagem from '../../Utils/imagemCor';
+import { IoPauseCircle, IoPlayBackCircle, IoPlayCircle, IoPlayForwardCircle } from "react-icons/io5";
 
 const Reprodutor = ({ listaReproducao }) => {
-    const [reproduzindoAgora, setReproduzindoAgora] = useState(false)
-    const [musicaAtual, setMusicaAtual] = useState(0)
-    const [cordaSection, setCordaSection] = useState('')
+    const [estaReproduzindo, setEstaReproduzindo] = useState(false);
+    const [indiceMusicaAtual, setIndiceMusicaAtual] = useState(0);
+    const [corDeFundo, setCorDeFundo] = useState('');
 
     const proximaMusica = () => {
-        setMusicaAtual((indexAnterior) => (indexAnterior + 1) % listaReproducao.length)
-    }
+        setIndiceMusicaAtual((indiceAnterior) => (indiceAnterior + 1) % listaReproducao.length); 
+    };
 
     const musicaAnterior = () => {
-        setMusicaAtual((indexAnterior) => indexAnterior - 1 < 0 ? listaReproducao.length - 1 : indexAnterior - 1)
-    }
+        setIndiceMusicaAtual((indiceAtual) => indiceAtual - 1 < 0 ? listaReproducao.length - 1 : indiceAtual - 1); 
+    };
 
-    const setPlayPause = () => {
-        setReproduzindoAgora(!reproduzindoAgora)
-    }
-
+    const alternarReproducao = () => {
+        setEstaReproduzindo(!estaReproduzindo);
+    };
 
     useEffect(() => {
         const alterarCor = async () => {
-            const cor = await calcularCorMediaDaImagem(listaReproducao[musicaAtual].capa)
-            setCordaSection(cor)
-
-        }
-        alterarCor()
-    }, [cordaSection, listaReproducao, musicaAtual])
+            const cor = await calcularCorMediaDaImagem(listaReproducao[indiceMusicaAtual].capa); 
+            setCorDeFundo(cor); 
+        };
+        alterarCor();
+    }, [indiceMusicaAtual, listaReproducao]);
 
     return (
-        <section style={{ backgroundColor: cordaSection, opacity: 0.9 }}>
+        <section style={{ backgroundColor: corDeFundo, opacity: 0.9 }}>
             <div className='reprodutor'>
                 <div className='infos'>
-                    <img src={listaReproducao[musicaAtual].capa} alt="Capa da música" />
-                    <h1>{listaReproducao[musicaAtual].titulo}</h1>
-                    <h3>{listaReproducao[musicaAtual].artista}</h3>
+                    <img src={listaReproducao[indiceMusicaAtual].capa} alt="Capa da música" />
+                    <h1>{listaReproducao[indiceMusicaAtual].titulo}</h1>
+                    <h3>{listaReproducao[indiceMusicaAtual].artista}</h3>
                 </div>
                 <div className='letra'>
-                    <p>{listaReproducao[musicaAtual].letra}</p>
+                    <p className='paragrafo_letra'>{listaReproducao[indiceMusicaAtual].letra}</p>
                 </div>
-
-
             </div>
             <div className="controls">
                 <i onClick={musicaAnterior}><IoPlayBackCircle /></i>
-                <i onClick={setPlayPause}>{reproduzindoAgora ? <IoPauseCircle className='play-pause' /> : <IoPlayCircle className='play-pause' />}</i>
+                <i onClick={alternarReproducao}>{estaReproduzindo ? <IoPauseCircle className='play-pause' /> : <IoPlayCircle className='play-pause' />}</i>
                 <i onClick={proximaMusica}><IoPlayForwardCircle /></i>
             </div>
             <AudioPlayer
-                audioUrl={listaReproducao[musicaAtual].audio}
+                audioUrl={listaReproducao[indiceMusicaAtual].audio}
                 aoAcabar={proximaMusica}
-                reproduzindoAgora={reproduzindoAgora}/>
+                reproduzindoAgora={estaReproduzindo}/>
         </section>
-    )
+    );
 };
 
-export default Reprodutor
+export default Reprodutor;

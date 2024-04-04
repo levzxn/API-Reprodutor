@@ -26,9 +26,14 @@ section {
 
 .letra{
     padding: 1em;
-    min-width: 50%;
-    max-height: 100%;
+    width: 60%;
+    height: 100%;
     overflow: auto;
+}
+
+.paragrafo_letra{
+    font-size: 1.5em;
+    width: 80%;
 }
 
 svg{
@@ -39,6 +44,7 @@ svg{
     flex-direction: column;
     display: flex;
     justify-content: flex-start;
+    max-height: 100%;
 }
 
 .reprodutor img {
